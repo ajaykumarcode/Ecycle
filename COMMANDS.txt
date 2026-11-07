@@ -1,0 +1,121 @@
+================================================================================
+E-CYCLE — FULL-STACK PROJECT EXECUTION & RUN COMMANDS GUIDE
+================================================================================
+
+This document contains all the exact commands required to set up, test, seed, 
+and run the complete E-Cycle platform (Backend, Database, and Flutter Frontend).
+
+All commands are designed for Windows 11 PowerShell or Command Prompt.
+
+--------------------------------------------------------------------------------
+1. PREREQUISITES CHECK
+--------------------------------------------------------------------------------
+
+Verify that all required development tools are installed on your system:
+
+  node -v
+  npm -v
+  flutter --version
+  mongod --version
+
+Ensure MongoDB service is running:
+
+  Get-Service -Name MongoDB
+
+If the MongoDB service is stopped, start it with:
+
+  Start-Service -Name MongoDB
+
+--------------------------------------------------------------------------------
+2. BACKEND SETUP & EXECUTION
+--------------------------------------------------------------------------------
+
+Open Terminal 1 and navigate to the backend folder:
+
+  cd C:\Users\ajayg\E-Cycle\backend
+
+A. Install Dependencies:
+  npm install
+
+B. Seed Default Administrator Account:
+  (Creates admin@ecycle.com with password Admin@ecycle123)
+  npm run seed:admin
+
+C. Run Automated Integration Test Suite (13 tests):
+  npm test
+
+D. Start the Backend API Server:
+  # For development mode with auto-reload:
+  npm run dev
+
+  # OR standard start:
+  npm start
+
+  => Backend will start at: http://localhost:5051
+  => Health Check Endpoint: http://localhost:5051/api/health
+
+--------------------------------------------------------------------------------
+3. FRONTEND (FLUTTER) SETUP & EXECUTION
+--------------------------------------------------------------------------------
+
+Open Terminal 2 and navigate to the Flutter project folder:
+
+  cd C:\Users\ajayg\E-Cycle\frontend\e_cycle_app
+
+A. Fetch Flutter Packages:
+  flutter pub get
+
+B. Verify Code Formatting & Static Analysis:
+  dart format --output=none --set-exit-if-changed lib test
+  flutter analyze
+
+C. Run Flutter Widget Tests:
+  flutter test
+
+D. Run the Application in Google Chrome (Web - Recommended for Admin & User):
+  flutter run -d chrome
+
+E. (Optional) Run on Other Available Devices:
+  # Check connected devices:
+  flutter devices
+
+  # Run on Windows Desktop:
+  flutter run -d windows
+
+  # Run on Android Emulator/Device:
+  flutter run -d android
+
+F. Build Production Release for Web:
+  flutter build web
+
+--------------------------------------------------------------------------------
+4. DEFAULT LOGIN CREDENTIALS FOR TESTING
+--------------------------------------------------------------------------------
+
+A. Administrator Account (Full Central Coordination Dashboard):
+   Email:    admin@ecycle.com
+   Password: Admin@ecycle123
+   Role:     admin
+
+B. Collection Agent Account (Workload & Collection Workflow):
+   Email:    agent1@gmail.com
+   Password: [Your existing password or register a new agent via Admin portal]
+   Role:     agent
+
+   * Tip: You can also register unlimited new agents directly from the 
+     Admin Dashboard -> "Collection Agents" -> "Add New Agent".
+
+C. Normal User Account (Scheduling & Rewards):
+   Email:    test1admin@gmail.com (or register a fresh account via the UI)
+   Role:     user
+
+--------------------------------------------------------------------------------
+5. QUICK TWO-COMMAND SUMMARY TO START EVERYTHING
+--------------------------------------------------------------------------------
+
+TERMINAL 1 (Backend API):
+  cd C:\Users\ajayg\E-Cycle\backend ; npm run dev
+
+TERMINAL 2 (Flutter App in Chrome):
+  cd C:\Users\ajayg\E-Cycle\frontend\e_cycle_app ; flutter run -d chrome
+================================================================================
